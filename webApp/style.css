@@ -1,0 +1,71 @@
+@font-face
+{
+    font-family: 'Times New Roman', serif;
+}
+
+.container-fluid{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.bg-1{
+    background-color: aquamarine;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.bg-2{
+    background-color: bisque;
+}
+
+.bg-3{
+    background-color:blueviolet;
+}
+
+.dashed{
+    border: 2px dashed red;
+    border-radius: 50px 50px 50px 50px;
+    box-shadow: 10px 10px 5px 2px #999999;
+}
+
+table, td, th{
+    border: 5px solid black;
+    text-align: center;
+}
+
+table{
+    border-collapse: collapse;
+    
+}
+
+th, td{
+    padding: 15px;
+}
+
+tr:hover{
+    background-color: #f5f5f5;
+}
+
+.rotate{
+    position: absolute;
+    width: 400px;
+    height: 100px;
+    padding: 20px;
+    transform: rotate(20deg);
+}
+
+
+
+h3.name
+{
+  font-weight: 300;
+  font-style: italic;
+}
+
+h3.title
+{
+    font-weight: 400;
+    font-style: oblique;
+}

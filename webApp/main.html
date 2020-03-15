@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta Tags --> 
+        <meta charset="utf-8"/>
+        <meta name="author" content="Sameer Naumani"/>
+        <meta name="viewport" content="width=device.width, initial-scale=1">
+        <meta name="description" content="Transactive Solar Controller ">
+        <!-- My CSS style sheet-->
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Title -->
+        <title>Sameer Naumani</title>
+    </head>
+
+    <body>
+        <div class="title" style="text-align: center;">
+            <h1>Firebase Transactive Solar Controller Web App</h1>
+            <textarea id="mainText" placeholder="Enter Data here"></textarea>
+            <button id="submitBtn" onclick= submitClick()> Ok </button>
+        </div>
+        
+        <div class="content" style="text-align: center; background-color: aquamarine;">
+            <main>
+                <form>
+                    <label for="userId">User ID</label><br>
+                    <input type="text" name="userId" id="userId"><br>
+                    <label for="firstName">First Name</label><br>
+                    <input type="text" name="firstName" id="firstName"><br> 
+                    <label for="lastName">Last Name</label><br>
+                    <input type="text" name="lastName" id="lastName"><br>  
+                    <label for="age">Age</label><br>
+                    <input type="number" name="age" id="age"><br>
+                    <button id="addBtn" class="btn waves-effect waves-light">Add</button>
+                    <button id="updateBtn" class="btn waves-effect waves-light">Update</button>
+                    <button id="removeBtn" class="btn waves-effect red darken-1">Remove</button>
+                </form>
+            </main>
+        </div>
+        
+        
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+         <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+        <script src="./app.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

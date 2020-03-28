@@ -1,88 +1,82 @@
-// Users and Bidding
-const userId = document.getElementById('userId');
-const firstName = document.getElementById('firstName');
-const lastName = document.getElementById('lastName');
-const company = document.getElementById('company');
-const bid = document.getElementById("bid");
-const submitBtn = document.getElementById('submitBtn');
-const updateBtn = document.getElementById('updateBtn');
-const removeBtn = document.getElementById('removeBtn'); 
+ // Users and Bidding
+var userId = document.getElementById('userId');
+var firstName = document.getElementById('firstName');
+var lastName = document.getElementById('lastName');
+var company = document.getElementById('company');
+var bid = document.getElementById("bid");
+var submitBtn = document.getElementById('submitBtn');
+var updateBtn = document.getElementById('updateBtn');
+var removeBtn = document.getElementById('removeBtn'); 
 
-const database = firebase.database();
-const usersRef = database.ref('/users');
 
+//DataBase Reference 
+var database = firebase.database();
+var usersRef = database.ref('/users');
+var voltageRef = database.ref('Voltage');
+var dateRef = database.ref('/Voltage/2020-03-26');
+
+
+//Submit Button for Bids
 submitBtn.addEventListener('click', e => {
-  e.preventDefault();
-  window.alert("good job")
-  usersRef.child(userId.value).set({
+e.preventDefault();
+window.alert("Submitted")
+usersRef.child(userId.value).set({
     first_name: firstName.value,
     last_name: lastName.value,
     company_name: company.value,
     bid_value: bid.value
-  });
+});
 });
 
-usersRef.on('value', snap=>{
-    userId.innerText = JSON.stringify(snap.val(),null,3)
-});
+const ulList = document.getElementById('list');
 
-
-//voltages
-var voltageID = doucment.getElementById('voltagID')
-var voltageRef = firebase.database().ref('Voltage/');
-
+// jquery always goes in this function
 $(document).ready(function(){
-
     // jQuery methods go here...
-    voltageRef.once("value").then(function(snapshot) {
+    //$('#voltageID').text("My function Sameer") 
+
+    dateRef.on("value", function(snapshot) {
+        console.log(snapshot.val());
+        }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+        
+    });
+
+    // List sync and reads every existing object
+    dateRef.on("child_added", function(snapshot) {
+    //list items
+        const li = document.createElement('li');
+        li.innerText = snapshot.val();
+        ulList.appendChild(li);
+    });
+
+    dateRef.once("value", function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key;
-          var childData = childSnapshot.val();              
+          var childData = childSnapshot.val(); 
+          
+                   
+          //console.log(key); // 2020-03-26
+          //console.log(childData); //
+         
         
-          //var time_val = childSnapshot.val().Time;
-          var id_val = childSnapshot.val().voltageID;
-        
-          $("#voltageID").append(id_val);
-          //$("#id").append(id_val);
-    
-          $("#voltageID").append(id_val + "</p> <br>");
+          $('#voltageID').append("<tr><td>"+ key + "</td><td>"+ childData + "</td></tr>");
+          
+          
+
+          //$("#name").append(time_val);
+          //$("#id").append(volt_val);
         
           });
         });
-  
-  });
 
 
 
- 
+
+});
 
 
-    var userDataRef = firebase.database().ref("UserData").orderByKey();
-    userDataRef.once("value").then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      var key = childSnapshot.key;
-      var childData = childSnapshot.val();              
-    
-      var name_val = childSnapshot.val().Name;
-      var id_val = childSnapshot.val().AssignedID;
-    
-      $("#output").append(name_val);
-      $("#id").append(id_val);
-    
-      });
-    });
-
-    $("#name").append("<p>" + name_val + "</p><p> " + id_val + "</p><br>");
-
-
-
-function submitBid(){
-    var database = firebase.database();
-    database.ref().child("text").set("some value");
-    window.alert("Successful");
-    EDP-app
-
-}
+   
 
 
 
@@ -92,72 +86,5 @@ function submitBid(){
 
 
 
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      $(".h5 mb-0 font-weight-bold text-gray-800").hide();
-  
-      var dialog = document.querySelector('#loginDialog');
-      /*
-      if (! dialog.showModal) {
-        dialogPolyfill.registerDialog(dialog);
-      }
-      */
-      dialog.close();
-  
-    } else {
-  
-      $(".login-cover").show();
-  
-      // No user is signed in.
-      var dialog = document.querySelector('#loginDialog');
-      if (! dialog.showModal) {
-        dialogPolyfill.registerDialog(dialog);
-      }
-      dialog.showModal();
-  
-    }
-  });
-  
-  
-  /* LOGIN PROCESS */
-  
-  $("#loginBtn").click(
-    function(){
-  
-  
-      var email = $("#loginEmail").val();
-      var password = $("#loginPassword").val();
-  
-      if(email != "" && password != ""){
-        $("#loginProgress").show();
-        $("#loginBtn").hide();
-  
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-  
-          $("#loginError").show().text(errorMessage);
-          $("#loginProgress").hide();
-          $("#loginBtn").show();
-        });
-      }
-    }
-  );
-  
-  
-  /* LOGOUT PROCESS */
-  
-  $("#signOutBtn").click(
-    function(){
-  
-      firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-      }).catch(function(error) {
-        // An error happened.
-        alert(error.message);
-      });
-  
-    }
-  );
+
+

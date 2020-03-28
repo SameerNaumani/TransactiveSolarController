@@ -1,4 +1,91 @@
-var bidText = document.getElementById("bidText");
+// Users and Bidding
+const userId = document.getElementById('userId');
+const firstName = document.getElementById('firstName');
+const lastName = document.getElementById('lastName');
+const company = document.getElementById('company');
+const bid = document.getElementById("bid");
+const submitBtn = document.getElementById('submitBtn');
+const updateBtn = document.getElementById('updateBtn');
+const removeBtn = document.getElementById('removeBtn'); 
+
+const database = firebase.database();
+const usersRef = database.ref('/users');
+
+submitBtn.addEventListener('click', e => {
+  e.preventDefault();
+  window.alert("good job")
+  usersRef.child(userId.value).set({
+    first_name: firstName.value,
+    last_name: lastName.value,
+    company_name: company.value,
+    bid_value: bid.value
+  });
+});
+
+usersRef.on('value', snap=>{
+    userId.innerText = JSON.stringify(snap.val(),null,3)
+});
+
+
+//voltages
+var voltageID = doucment.getElementById('voltagID')
+var voltageRef = firebase.database().ref('Voltage/');
+
+$(document).ready(function(){
+
+    // jQuery methods go here...
+    voltageRef.once("value").then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.key;
+          var childData = childSnapshot.val();              
+        
+          //var time_val = childSnapshot.val().Time;
+          var id_val = childSnapshot.val().voltageID;
+        
+          $("#voltageID").append(id_val);
+          //$("#id").append(id_val);
+    
+          $("#voltageID").append(id_val + "</p> <br>");
+        
+          });
+        });
+  
+  });
+
+
+
+ 
+
+
+    var userDataRef = firebase.database().ref("UserData").orderByKey();
+    userDataRef.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var key = childSnapshot.key;
+      var childData = childSnapshot.val();              
+    
+      var name_val = childSnapshot.val().Name;
+      var id_val = childSnapshot.val().AssignedID;
+    
+      $("#output").append(name_val);
+      $("#id").append(id_val);
+    
+      });
+    });
+
+    $("#name").append("<p>" + name_val + "</p><p> " + id_val + "</p><br>");
+
+
+
+function submitBid(){
+    var database = firebase.database();
+    database.ref().child("text").set("some value");
+    window.alert("Successful");
+    EDP-app
+
+}
+
+
+
 
 
 

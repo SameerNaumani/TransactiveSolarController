@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>Solar Controller - Dashboard</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,7 +17,8 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+  <!--jquery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -33,7 +34,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">Solar Controller Admin <sup>2</sup></div>
       </a>
 
       <!-- Divider -->
@@ -427,9 +428,26 @@
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
-                    <div class="col mr-2"> Enter Bid
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><input id="bidText" type="text" class="advancedSearchTextBox"/>  </div>
-                      <div class="button.bg-primary:hover"> <button type="submit">Submit Bid</button> </div> 
+                    
+                    <form>
+                      <label for="userId">User ID</label><br>
+                      <input type="text" name="userId" id="userId"><br>
+                      <label for="firstName">First Name</label><br>
+                      <input type="text" name="firstName" id="firstName"><br>
+                      <label for="lastName">Last Name</label><br>
+                      <input type="text" name="lastName" id="lastName"><br>  
+                      <label for="company">Company</label><br>
+                      <input type="text" name="company" id="company"><br>
+                      <label for="Enter Bid">Enter Bid</label> <br>
+                      <input type="number" name="bid" id="bid"/> <br>
+                      <button id="addBtn" class="btn waves-effect waves-light">Add</button>
+                      <button id="updateBtn" class="btn waves-effect waves-light">Update</button>
+                      <button id="removeBtn" class="btn waves-effect red darken-1">Remove</button> <br>
+                      <button id="submitBtn" class="button.bg-primary:hover" >Submit</button>
+                  </form>
+
+                    <div class="col mr-2"> 
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"> </div>  
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -438,6 +456,9 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="row">
 
             <!-- Pending Requests Card Example -->
             <div class="col-xl-5 col-md-6 mb-4">
@@ -456,10 +477,35 @@
               </div>
             </div>
           </div>
+         
 
 
           </div>
         
+          <!-- Content Row -->
+          <div class="row">
+            <div class="col-xl-5 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                        <output id="voltageID"></output>
+                      </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <output id="id">hello</output>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+               
+          </div>
 
           <!-- Content Row -->
 
@@ -470,7 +516,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Power Overview</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -532,6 +578,8 @@
               </div>
             </div>
           </div>
+
+
 
           <!-- Content Row -->
           <div class="row">
@@ -637,21 +685,6 @@
                   <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
                 </div>
               </div>
-
-              <!-- Approach -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                </div>
-                <div class="card-body">
-                  <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
-                  <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
         </div>
         <!-- /.container-fluid -->
 
@@ -707,6 +740,7 @@
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->

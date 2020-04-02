@@ -92,7 +92,6 @@ $(document).ready(function(){
 //---------------------------------------- Power Reference -----------------------------------------
     var powRef = database.ref('Power');
     var powDateRef = powRef.child('2020-03-29');
-    var date = powRef.child.
 
     //Testing
     function pushPowerData(){
@@ -171,4 +170,61 @@ $(document).ready(function(){
     }
     displayCurr();
 
+//-------------------------------Power Factor------------------------------
+var pfRef = database.ref('PF');
+var pfDateRef = pfRef.child('2020-03-29');
+function displayPf(){
+    pfDateRef.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.key; //unique ID
+          var childData = childSnapshot.val(); 
+          
+          var date = childSnapshot.val().date;
+          var time = childSnapshot.val().time;
+          var value = childSnapshot.val().value;
+          
+          //console.log(key); // 2020-03-26
+          //console.log(childData); //
+          $('#pfID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
+        
+          });
+        });
+}
+displayPf();
+
+
+//------------------------------ Relay State ----------------------------------
+    var relayRef = database.ref('Relay');
+
+    function displayRef(){
+        relayRef.on("value", function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var key = childSnapshot.key; //unique ID
+              var childData = childSnapshot.val(); 
+              
+              var date = childSnapshot.val().date;
+              var time = childSnapshot.val().time;
+              var value = childSnapshot.val().value;
+              
+              console.log(key); // 2020-03-26
+              console.log(childData); //
+              $('#relayState').append(childData);
+            
+              });
+            });
+    }
+    displayRef();
+
+
+
+
+
+
+
+
+
+
+
 });
+
+

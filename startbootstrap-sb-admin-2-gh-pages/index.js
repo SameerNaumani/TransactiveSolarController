@@ -10,7 +10,7 @@ $(document).ready(function(){
     var updateBtn = document.getElementById('updateBtn');
     var removeBtn = document.getElementById('removeBtn'); 
 
-    //Submit Button for Bids
+//------------------------------------ Submit Button for Bids ----------------------------------------
     submitBtn.addEventListener('click', e => {
     e.preventDefault();
     window.alert("Submitted")
@@ -21,96 +21,95 @@ $(document).ready(function(){
         bid_value: bid.value
     });
     });
-
     const ulList = document.getElementById('list');
-
-    //DataBase Reference 
+    
+//-------------------------------------- DataBase Reference -----------------------------------------------
     var database = firebase.database();
     var usersRef = database.ref('/users');
-    var voltageRef = database.ref('Voltage');
-    var dateRef = database.ref('/Voltage/2020-03-26');
-
-    // ---------------------------Voltage-------------------------
-    // jQuery methods go here...
     
+
+//------------------------------------ Get Current Time and Date ----------------------------------------------
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    
+    var date_val = mm + '-' + dd + '-' + yyyy;
+
+    function checkTime(i) {
+        if (i < 10) {
+        i = "0" + i;
+        }
+        return i;
+    } 
+    
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+    // add a zero in front of numbers<10
+    m = checkTime(m);
+    s = checkTime(s);
+    var time = h + ":" + m + ":" + s;
+
+    console.log(time);
+
+// -------------------------------------------- Voltage --------------------------------------------------
+    var voltageRef = database.ref('Voltage');
+    var dateRef = voltageRef.child('2020-03-29');
+    
+    //Testing
+    function pushVoltData(){
+        voltageRef.push({
+            date: date_val,
+            time: time,
+            value: Math.floor(Math.random()*(999-100+1)+100)
+        });
+    }
+    //pushVoltData();
+
     function displayVolt(){
         dateRef.on("value", function(snapshot) {
             console.log(snapshot.val());
             }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
-            
-        });
-    
-        // List sync and reads every existing object
-        dateRef.on("child_added", function(snapshot) {
-        //list items
-            const li = document.createElement('li');
-            li.innerText = snapshot.val();
-            ulList.appendChild(li);
         });
     
         dateRef.once("value", function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
               var key = childSnapshot.key;
               var childData = childSnapshot.val(); 
-              
+
               //console.log(key); // 2020-03-26
               //console.log(childData); //
-              $('#voltageID').append("<tr><td>"+ key + "</td><td>"+ childData + "</td></tr>");
-            
+              $('#voltageID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
+
               });
             });
     }
-    
-    
-  //--------------- Get Current Time and Date------------------------------
-    
-  function getTime(){
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    
+    displayVolt();
 
-    var date_val = mm + '-' + dd + '-' + yyyy;
-
-    function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      } 
-    
-      var d = new Date();
-        var h = d.getHours();
-        var m = d.getMinutes();
-        var s = d.getSeconds();
-        // add a zero in front of numbers<10
-        m = checkTime(m);
-        s = checkTime(s);
-        var time = h + ":" + m + ":" + s;
-
-    console.log(time);
-
-  }
-    
-
-    //---------------------------------Power Reference -----------------
+//---------------------------------------- Power Reference -----------------------------------------
     var powRef = database.ref('Power');
+    var powDateRef = powRef.child('2020-03-29');
+    var date = powRef.child.
 
+    //Testing
     function pushPowerData(){
         powRef.push({
             date: date_val,
             time: time,
-            value: '67'
+            value: Math.floor(Math.random()*(999-100+1)+100)
         });
     }
+   //pushPowerData();
 
+   //Test
     function getData(){
         powRef.on("value", function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 var keys = childSnapshot.key;
-                //var childData = childSnapshot.val();
+                var childData = childSnapshot.val();
                 //console.log(keys);
 
                 for(var i=0; i<keys.length; i++){
@@ -119,34 +118,57 @@ $(document).ready(function(){
                     var value = childSnapshot.val().value;
                     console.log(time,value);
                 }
-            });
-            
+            }); 
         });
-
-
-
     }
+    //getData();
 
-    getData();
+    function displayPow(){
+        powDateRef.once("value", function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var key = childSnapshot.key;
+              var childData = childSnapshot.val(); 
+              
+              //console.log(key); // 2020-03-26
+              //console.log(childData); //
+              $('#powerID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
+            
+              });
+            });
+    }
+    displayPow();
 
-    
+//----------------------------------------- Current --------------------------------------------
+    var currRef = database.ref('Current');
+    var currDateRef = currRef.child('2020-03-29');
 
+    //Test
+    function pushCurrData(){
+        currRef.push({
+            date: date_val,
+            time: time,
+            value: Math.floor(Math.random()*(999-100+1)+100)
+        });
+    }
+    //pushCurrData();
 
-
-
+    function displayCurr(){
+        currDateRef.once("value", function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var key = childSnapshot.key; //unique ID
+              var childData = childSnapshot.val(); 
+              
+              var date = childSnapshot.val().date;
+              var time = childSnapshot.val().time;
+              var value = childSnapshot.val().value;
+              
+              //console.log(key); // 2020-03-26
+              //console.log(childData); //
+              $('#currentID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
+            
+              });
+            });
+    }
+    displayCurr();
 
 });
-
-
-   
-
-
-
-
-
-
-
-
-
-
-

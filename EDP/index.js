@@ -1,6 +1,33 @@
 
 // jquery always goes in this function
 $(document).ready(function(){
+    var powerBtn = document.getElementById('PowerSubmit');
+
+
+    function runScript(input) {
+        var Data = $.ajax({
+             type: "get",
+             url: "/python/AvgPower.py",
+             async: false,
+             data: { param: input },
+             //success: callbackFunc
+         });
+         return Data.responseText;
+     }
+
+     //response = runScript('Average Power');
+     //console.log(response);
+
+     powerBtn.addEventListener('click', e => {
+        e.preventDefault();
+        window.alert("Submitted")
+        response = runScript('Average Power');
+        console.log(response);
+        });
+
+     
+
+
     // Users and Bidding
     var userId = document.getElementById('userId');
     var firstName = document.getElementById('firstName');
@@ -35,7 +62,7 @@ $(document).ready(function(){
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
     
-    var date_val = mm + '-' + dd + '-' + yyyy;
+    var date_val = yyyy + '-' + mm + '-' + dd;
 
     function checkTime(i) {
         if (i < 10) {
@@ -53,46 +80,13 @@ $(document).ready(function(){
     s = checkTime(s);
     var time = h + ":" + m + ":" + s;
 
-    console.log(time);
+    console.log(date_val);
 
-// -------------------------------------------- Voltage --------------------------------------------------
-    var voltageRef = database.ref('Voltage');
-    var dateRef = voltageRef.child('2020-03-29');
-    
-    //Testing
-    function pushVoltData(){
-        voltageRef.push({
-            date: date_val,
-            time: time,
-            value: Math.floor(Math.random()*(999-100+1)+100)
-        });
-    }
-    //pushVoltData();
 
-    function displayVolt(){
-        dateRef.on("value", function(snapshot) {
-            console.log(snapshot.val());
-            }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        });
-    
-        dateRef.once("value", function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-              var key = childSnapshot.key;
-              var childData = childSnapshot.val(); 
 
-              //console.log(key); // 2020-03-26
-              //console.log(childData); //
-              $('#voltageID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
-
-              });
-            });
-    }
-    displayVolt();
-
-//---------------------------------------- Power Reference -----------------------------------------
+//---------------------------------------- Average Power Reference -----------------------------------------
     var powRef = database.ref('Power');
-    var powDateRef = powRef.child('2020-03-29');
+    var powDateRef = powRef.child('date_val');
 
     //Testing
     function pushPowerData(){
@@ -123,76 +117,6 @@ $(document).ready(function(){
     }
     //getData();
 
-    function displayPow(){
-        powDateRef.once("value", function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-              var key = childSnapshot.key;
-              var childData = childSnapshot.val(); 
-              
-              //console.log(key); // 2020-03-26
-              //console.log(childData); //
-              $('#powerID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
-            
-              });
-            });
-    }
-    displayPow();
-
-//----------------------------------------- Current --------------------------------------------
-    var currRef = database.ref('Current');
-    var currDateRef = currRef.child('2020-03-29');
-
-    //Test
-    function pushCurrData(){
-        currRef.push({
-            date: date_val,
-            time: time,
-            value: Math.floor(Math.random()*(999-100+1)+100)
-        });
-    }
-    //pushCurrData();
-
-    function displayCurr(){
-        currDateRef.once("value", function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-              var key = childSnapshot.key; //unique ID
-              var childData = childSnapshot.val(); 
-              
-              var date = childSnapshot.val().date;
-              var time = childSnapshot.val().time;
-              var value = childSnapshot.val().value;
-              
-              //console.log(key); // 2020-03-26
-              //console.log(childData); //
-              $('#currentID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
-            
-              });
-            });
-    }
-    displayCurr();
-
-//-------------------------------Power Factor------------------------------
-var pfRef = database.ref('PF');
-var pfDateRef = pfRef.child('2020-03-29');
-function displayPf(){
-    pfDateRef.once("value", function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-          var key = childSnapshot.key; //unique ID
-          var childData = childSnapshot.val(); 
-          
-          var date = childSnapshot.val().date;
-          var time = childSnapshot.val().time;
-          var value = childSnapshot.val().value;
-          
-          //console.log(key); // 2020-03-26
-          //console.log(childData); //
-          $('#pfID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
-        
-          });
-        });
-}
-displayPf();
-
 
 //------------------------------ Relay State ----------------------------------
     var relayRef = database.ref('Relay');
@@ -215,15 +139,6 @@ displayPf();
             });
     }
     displayRef();
-
-
-
-
-
-
-
-
-
 
 
 });

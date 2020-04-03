@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #Modules
 #from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import *

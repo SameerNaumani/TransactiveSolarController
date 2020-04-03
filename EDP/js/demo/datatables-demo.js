@@ -2,10 +2,36 @@
 $(document).ready(function() {
   
  var database = firebase.database();
+ 
+ //------------------------------------ Get Current Time and Date ----------------------------------------------
+ var today = new Date();
+ var dd = String(today.getDate()).padStart(2, '0');
+ var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+ var yyyy = today.getFullYear();
+ 
+ var date_val = yyyy + '-' + mm + '-' + dd;
+
+ function checkTime(i) {
+     if (i < 10) {
+     i = "0" + i;
+     }
+     return i;
+ } 
+ 
+ var d = new Date();
+ var h = d.getHours();
+ var m = d.getMinutes();
+ var s = d.getSeconds();
+ // add a zero in front of numbers<10
+ m = checkTime(m);
+ s = checkTime(s);
+ var time = h + ":" + m + ":" + s;
+
+ console.log(date_val);
 
  // -------------------------------------------- Power --------------------------------------------------
   var powRef = database.ref('Power');
-  var powDateRef = powRef.child('2020-03-29');
+  var powDateRef = powRef.child(date_val);
 
   function displayPow(){
       powDateRef.once("value", function(snapshot) {
@@ -13,8 +39,8 @@ $(document).ready(function() {
         snapshot.forEach(function(childSnapshot) {
             var key = childSnapshot.key;
             var childData = childSnapshot.val(); 
-            listMarkup += "<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>";
-            //$('#voltageID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
+            listMarkup += "<tr><td>"+ date_val + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>";
+            //$('#voltageID').append("<tr><td>"+ date_val + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
 
             const myList = document.getElementById("powerID");
             myList.innerHTML = listMarkup;
@@ -27,7 +53,7 @@ $(document).ready(function() {
 
   // -------------------------------------------- Voltage --------------------------------------------------
   var voltageRef = database.ref('Voltage');
-  var dateRef = voltageRef.child('2020-03-29');
+  var dateRef = voltageRef.child(date_val);
   function displayVolt(){
       dateRef.on("value", function(snapshot) {
           console.log(snapshot.val());
@@ -40,8 +66,8 @@ $(document).ready(function() {
         snapshot.forEach(function(childSnapshot) {
             var key = childSnapshot.key;
             var childData = childSnapshot.val(); 
-            listMarkup += "<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>";
-            //$('#voltageID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
+            listMarkup += "<tr><td>"+ date_val + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>";
+            //$('#voltageID').append("<tr><td>"+ 'date_val' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
 
             const myList = document.getElementById("voltageID");
             myList.innerHTML = listMarkup;
@@ -51,18 +77,18 @@ $(document).ready(function() {
   }
   displayVolt();
 
-  // -------------------------------------------- Power --------------------------------------------------
+  // -------------------------------------------- current --------------------------------------------------
   var currRef = database.ref('Current');
-  var currDateRef = powRef.child('2020-03-29');
+  var currDateRef = currRef.child(date_val);
 
   function displayCurr(){
-      powDateRef.once("value", function(snapshot) {
+      currDateRef.once("value", function(snapshot) {
         let listMarkup = '';  
         snapshot.forEach(function(childSnapshot) {
             var key = childSnapshot.key;
             var childData = childSnapshot.val(); 
-            listMarkup += "<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>";
-            //$('#voltageID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
+            listMarkup += "<tr><td>"+ date_val + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>";
+            //$('#voltageID').append("<tr><td>"+ 'date_val' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
 
             const myList = document.getElementById("currentID");
             myList.innerHTML = listMarkup;
@@ -72,18 +98,18 @@ $(document).ready(function() {
   }
   displayCurr();
 
-  // -------------------------------------------- Power --------------------------------------------------
+  // -------------------------------------------- Power Factor --------------------------------------------------
   var pfRef = database.ref('PF');
-  var pfDateRef = powRef.child('2020-03-29');
+  var pfDateRef = pfRef.child(date_val);
 
   function displayPF(){
-      powDateRef.once("value", function(snapshot) {
+      pfDateRef.once("value", function(snapshot) {
         let listMarkup = '';  
         snapshot.forEach(function(childSnapshot) {
             var key = childSnapshot.key;
             var childData = childSnapshot.val(); 
-            listMarkup += "<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>";
-            //$('#voltageID').append("<tr><td>"+ '2020-03-29' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
+            listMarkup += "<tr><td>"+ date_val + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>";
+            //$('#voltageID').append("<tr><td>"+ 'date_val' + "</td><td>"+ key + "</td><td>"+ childData +"</td></tr>");
 
             const myList = document.getElementById("pfID");
             myList.innerHTML = listMarkup;

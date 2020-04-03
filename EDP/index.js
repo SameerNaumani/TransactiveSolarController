@@ -1,3 +1,4 @@
+
 // jquery always goes in this function
 $(document).ready(function(){
     // Users and Bidding

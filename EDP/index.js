@@ -216,12 +216,7 @@ displayPf();
     displayRef();
 
 
-from AvgPower.py import avg_power()
 
-$('#PowerID').text(avg_power());
-
-//overlap only one entry
-//run a python 
 
 
 

@@ -1,32 +1,10 @@
 
 // jquery always goes in this function
 $(document).ready(function(){
-    var powerBtn = document.getElementById('PowerSubmit');
 
-
-    function runScript(input) {
-        var Data = $.ajax({
-             type: "get",
-             url: "/python/AvgPower.py",
-             async: false,
-             data: { param: input },
-             //success: callbackFunc
-         });
-         return Data.responseText;
-     }
-
-     //response = runScript('Average Power');
-     //console.log(response);
-
-     powerBtn.addEventListener('click', e => {
-        e.preventDefault();
-        window.alert("Submitted")
-        response = runScript('Average Power');
-        console.log(response);
-        });
-
-     
-
+   //-------------------------------------- DataBase Reference -----------------------------------------------
+   var database = firebase.database();
+   var usersRef = database.ref('/users');
 
     // Users and Bidding
     var userId = document.getElementById('userId');
@@ -35,6 +13,7 @@ $(document).ready(function(){
     var company = document.getElementById('company');
     var bid = document.getElementById("bid");
     var submitBtn = document.getElementById('submitBtn');
+    var addBtn = document.getElementById('addBtn');
     var updateBtn = document.getElementById('updateBtn');
     var removeBtn = document.getElementById('removeBtn'); 
 
@@ -49,11 +28,32 @@ $(document).ready(function(){
         bid_value: bid.value
     });
     });
-    const ulList = document.getElementById('list');
-    
-//-------------------------------------- DataBase Reference -----------------------------------------------
-    var database = firebase.database();
-    var usersRef = database.ref('/users');
+
+    addBtn.addEventListener('click', e => {
+        e.preventDefault();
+        const newData = {
+            first_name: firstName.value,
+            last_name: lastName.value,
+            age: age.value
+        };
+    });
+
+    updateBtn.addEventListener('click', e => {
+        e.preventDefault();
+        const newData = {
+            first_name: firstName.value,
+            last_name: lastName.value,
+            age: age.value
+        };
+        usersRef.child(userId.value).update(newData);
+      });
+
+      removeBtn.addEventListener('click', e => {
+        e.preventDefault();
+        usersRef.child(userId.value).remove()
+        .then(()=> { console.log('User Deleted !'); })
+        .catch(error => { console.error(error); });
+    });
     
 
 //------------------------------------ Get Current Time and Date ----------------------------------------------
@@ -85,8 +85,8 @@ $(document).ready(function(){
 
 
 //---------------------------------------- Average Power Reference -----------------------------------------
-    var powRef = database.ref('Power');
-    var powDateRef = powRef.child('date_val');
+    var AvgpowRef = database.ref('AvgPower');
+    
 
     //Testing
     function pushPowerData(){
@@ -97,6 +97,25 @@ $(document).ready(function(){
         });
     }
    //pushPowerData();
+
+   function powRef(){
+    AvgpowRef.on("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.key; //unique ID
+          var childData = childSnapshot.val(); 
+          
+          var date = childSnapshot.val().date;
+          var time = childSnapshot.val().time;
+          var value = childSnapshot.val().value;
+          
+          console.log(key); // 2020-03-26
+          console.log(childData); //
+          $('#powerID').append(childData);
+        
+          });
+        });
+    }
+    powRef();
 
    //Test
     function getData(){
@@ -141,6 +160,56 @@ $(document).ready(function(){
     displayRef();
 
 
-});
 
+    //------------------------------ Avg Current ----------------------------------
+    var AvgCurrRef = database.ref('AvgCurrent');
+
+    function CurrRef(){
+        AvgCurrRef.on("value", function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var key = childSnapshot.key; //unique ID
+              var childData = childSnapshot.val(); 
+ 
+              $('#currentID').append(childData);
+            
+              });
+            });
+    }
+    CurrRef();
+
+    //------------------------------ Avg Voltage ----------------------------------
+    var AvgVoltRef = database.ref('AvgVoltage');
+
+    function VoltRef(){
+        AvgVoltRef.on("value", function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var key = childSnapshot.key; //unique ID
+              var childData = childSnapshot.val(); 
+ 
+              $('#voltageID').append(childData);
+            
+              });
+            });
+    }
+    VoltRef();
+
+     //------------------------------ Avg Voltage ----------------------------------
+     var AvgPFRef = database.ref('AvgPF');
+
+     function pfRef(){
+         AvgPFRef.on("value", function(snapshot) {
+             snapshot.forEach(function(childSnapshot) {
+               var key = childSnapshot.key; //unique ID
+               var childData = childSnapshot.val(); 
+  
+               $('#pfID').append(childData);
+             
+               });
+             });
+     }
+     pfRef();
+
+
+
+});
 

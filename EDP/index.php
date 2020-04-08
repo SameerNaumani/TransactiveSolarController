@@ -48,13 +48,52 @@
           <span>Dashboard</span></a>
       </li>
 
-     
       <!-- Divider -->
       <hr class="sidebar-divider">
 
       <!-- Heading -->
       <div class="sidebar-heading">
         Interface
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Components</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Components:</h6>
+            <a class="collapse-item" href="buttons.html">Buttons</a>
+            <a class="collapse-item" href="cards.html">Cards</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Utilities</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Utilities:</h6>
+            <a class="collapse-item" href="utilities-color.html">Colors</a>
+            <a class="collapse-item" href="utilities-border.html">Borders</a>
+            <a class="collapse-item" href="utilities-animation.html">Animations</a>
+            <a class="collapse-item" href="utilities-other.html">Other</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Addons
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
@@ -77,12 +116,12 @@
         </div>
       </li>
 
-      <!-- Nav Item - Charts 
+      <!-- Nav Item - Charts -->
       <li class="nav-item">
         <a class="nav-link" href="charts.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
-      </li> -->
+      </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
@@ -239,17 +278,17 @@
                   </div>
                   <div>
                     <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                    <div class="small text-gray-500">Ahsan sr · 2d</div>
+                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/darth-vader.png" alt="">
+                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
                     <div class="status-indicator bg-success"></div>
                   </div>
                   <div>
-                    <div class="text-truncate">Status Report from Solar Panel</div>
-                    <div class="small text-gray-500">Amr · 2w</div>
+                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
+                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
                   </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -297,7 +336,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="tables.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
           <!-- Content Row -->
@@ -317,9 +356,14 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Average Power (kW)</div>
                       <div>
+                        <input type="submit" id="PowerSubmit">
+                        <?php
+                         echo "My first script"; 
+                         ?>
                         <table style="width:100%">
                           <thead>
                             <tr>
+                              <td>Value</td>
                             </tr>
                           </thead>
                           <tbody id="powerID">
@@ -348,7 +392,7 @@
                         <table style="width:100%">
                           <thead>
                             <tr>
-                              
+                              <td>Value</td>
                             </tr>
                           </thead>
                           <tbody id="currentID">
@@ -377,7 +421,7 @@
                         <table style="width:100%">
                           <thead>
                             <tr>
-                              <td></td>
+                              <td>Value</td>
                             </tr>
                           </thead>
                           <tbody id="voltageID">
@@ -400,16 +444,16 @@
               <!-- Content Row -->
           <div class="row">
             <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Power Factor</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Power Factor</div>
                       <div>
                         <table style="width:100%">
                           <thead>
                             <tr>
-                              <td></td>
+                              <td>Value</td>
                             </tr>
                           </thead>
                           <tbody id="pfID">
@@ -420,21 +464,40 @@
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            
 
-            <!-- Current-->
-            <div class="col-xl-4 col-md-6 mb-4">
+            <!-- Earnings (Monthly) Card Example -->
+            
+            <div class="col-xl-5 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Bid</div>
-                      <div>18</div>
+                    
+                    <form>
+                      <label for="userId">User ID</label><br>
+                      <input type="text" name="userId" id="userId"><br>
+                      <label for="firstName">First Name</label><br>
+                      <input type="text" name="firstName" id="firstName"><br>
+                      <label for="lastName">Last Name</label><br>
+                      <input type="text" name="lastName" id="lastName"><br>  
+                      <label for="company">Company</label><br>
+                      <input type="text" name="company" id="company"><br>
+                      <label for="Enter Bid">Enter Bid</label> <br>
+                      <input type="number" name="bid" id="bid"/> <br>
+                      <button id="addBtn" class="btn waves-effect waves-light">Add</button>
+                      <button id="updateBtn" class="btn waves-effect waves-light">Update</button>
+                      <button id="removeBtn" class="btn waves-effect red darken-1">Remove</button> <br>
+                      <button id="submitBtn" class="button.bg-primary:hover" >Submit</button>
+                  </form>
+
+                    <div class="col mr-2"> 
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"> </div>  
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -443,17 +506,60 @@
                 </div>
               </div>
             </div>
+          </div>
 
-            
+          <div class="row">
 
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-5 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Current Bid</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            <div class="col-xl-4 col-md-6 mb-4">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Bids</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div> 
+                        </div>
+                        <div class="col">
+                          <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div> 
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-5 col-md-6 mb-4">
               <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Relay State</div>
-                      <div><text id="relayState"></text></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><text id="relayState"></text></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -468,48 +574,7 @@
           </div>
 
         
-         <div class="row">
-
-          <!-- User Form -->
-            
-          <div class="col-xl-5 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  
-                  <form> <strong style="color:cadetblue;">Registration Form </strong> <br>
-                    <label for="userId">User ID</label><br>
-                    <input type="text" name="userId" id="userId"><br>
-                    <label for="firstName">First Name</label><br>
-                    <input type="text" name="firstName" id="firstName"><br>
-                    <label for="lastName">Last Name</label><br>
-                    <input type="text" name="lastName" id="lastName"><br>  
-                    <label for="company">Company</label><br>
-                    <input type="text" name="company" id="company"><br>
-                    <label for="Enter Bid">Enter Bid</label> <br>
-                    <input type="number" name="bid" id="bid"/> <br>
-                    <button id="addBtn" class="btn waves-effect waves-light">Add</button>
-                    <button id="updateBtn" class="btn waves-effect waves-light">Update</button>
-                    <button id="removeBtn" class="btn waves-effect red darken-1">Remove</button> <br>
-                    <button id="submitBtn" class="button.bg-primary:hover" >Submit</button>
-                </form>
-
-                  <div class="col mr-2"> 
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"> </div>  
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="cont_a18aeec9139e75f96f47debb97e8ebc5"><script type="text/javascript" async src="https://www.theweather.com/wid_loader/a18aeec9139e75f96f47debb97e8ebc5"></script></div>
-          
-
-         </div>
-         <br>
+         
     
                
         
@@ -551,7 +616,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Power Sources</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -572,13 +637,13 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> OPG
+                      <i class="fas fa-circle text-primary"></i> Direct
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Toronto Hydro
+                      <i class="fas fa-circle text-success"></i> Social
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Hydro One
+                      <i class="fas fa-circle text-info"></i> Referral
                     </span>
                   </div>
                 </div>
@@ -597,33 +662,33 @@
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Energy Status</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                 </div>
                 <div class="card-body">
-                  <h4 class="small font-weight-bold">Solar Panel Charge <span class="float-right">20%</span></h4>
+                  <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">Tracking <span class="float-right">40%</span></h4>
+                  <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">Power Database <span class="float-right">60%</span></h4>
+                  <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">Energy <span class="float-right">80%</span></h4>
+                  <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">Bids Today <span class="float-right">Complete!</span></h4>
+                  <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
                   <div class="progress">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                 </div>
               </div>
 
-              <!-- Color System 
+              <!-- Color System -->
               <div class="row">
                 <div class="col-lg-6 mb-4">
                   <div class="card bg-primary text-white shadow">
@@ -675,10 +740,23 @@
                 </div>
               </div>
 
-            </div>-->
+            </div>
 
             <div class="col-lg-6 mb-4">
 
+              <!-- Illustrations -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                </div>
+                <div class="card-body">
+                  <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
+                  </div>
+                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
+                  <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
+                </div>
+              </div>
         </div>
         <!-- /.container-fluid -->
 

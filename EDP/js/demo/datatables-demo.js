@@ -9,9 +9,9 @@ $(document).ready(function() {
  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
  var yyyy = today.getFullYear();
  
- //var date_val = yyyy + '-' + mm + '-' + dd;
+ var date_val = yyyy + '-' + mm + '-' + dd;
 
- var date_val = '2020-04-02';
+ //var date_val = '2020-04-02';
 
  function checkTime(i) {
      if (i < 10) {
